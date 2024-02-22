@@ -2,17 +2,10 @@ import pygame
 import math
 import numpy as np
 
-
-
 running = True
 
 width = 1200
 height = 700
-
-
-
-
-
 
 #############
 
@@ -24,15 +17,11 @@ rayCount = 8
 rayLength  = 80
 #raySpread = math.pi + math.pi
 raySpread = math.pi
-#rays = []
-
 
 arrayA = []
 
 
 ####################3
-
-
 
 ###########car rotation
 max_vel = 100
@@ -40,13 +29,10 @@ ratation_vel= 0
 
 angle = 0
 
-
-
 ############### CAR Posistion
 
 
 player_pos =pygame.Vector2(700,590)
-
 
 def distance(x1,y1,x2,y2):
     return math.hypot(x2-x1,y2-y1)
@@ -65,16 +51,11 @@ def line_intersection(x1,y1,x2,y2,x3,y3,x4,y4):
 
     else:
         return None
-
-
-
-
-
+        
 pygame.init()
 clock = pygame.time.Clock()
 
 screen = pygame.display.set_mode((width,height))
-
 
 def add_ray():
     rays = []
@@ -97,8 +78,6 @@ def add_ray():
         pygame.draw.line(screen,(233,22,2),rays[i][0],rays[i][1],4)
     return rays
 
-
-
 while running:
 
     #filled screen with black color to
@@ -112,19 +91,11 @@ while running:
             pygame.quit()
             quit()
             break
-
-
+            
     add_ray()
 
-
-
-
     pygame.draw.circle(screen,(30,200,179),[player_pos.x,player_pos.y],20)
-
-
-
-
-
+    
     pygame.draw.line(screen,(233,222,2),[800,100],[800,600],4)
     pygame.draw.line(screen,(233,222,2),[80,100],[800,100],4)
     pygame.draw.line(screen,(233,222,2),[600,300],[600,600],4)
@@ -142,8 +113,6 @@ while running:
     [800,600,600,600]
     ])
 
-
-
     arrayA= add_ray()
     #print(arrayA)
     arrayB=[]
@@ -156,8 +125,7 @@ while running:
 
     for a in arrayA:
         arrayB.append(a)
-
-
+        
     movement_vector = np.array([arrayB])
 
     distN =[]
@@ -167,8 +135,7 @@ while running:
         for a in arrayD:
 
             result =line_intersection(*a,*wall)
-
-
+            
             if result:
                 done = True
                 x = int(result[0])
@@ -176,12 +143,8 @@ while running:
                 y = int(result[1])
 
                 distN.append([x,y])
-
-
-
+                
                 pygame.draw.circle(screen,(200,200,200),[x,y],5)
-
-
 
     #print("dist Is ",distN)
 
@@ -190,11 +153,8 @@ while running:
     for a in distN:
         z = distance(*a,player_pos.x,player_pos.y)
         Dist.append(z)
-
-
+        
     #print("distance between is ",Dist)
-
-
 
     keys = pygame.key.get_pressed()
     if keys[pygame.K_UP]:
